@@ -11,8 +11,14 @@
     "esModuleInterop": true,
     "baseUrl": "src",
     "paths": {
-      "@/*": ["*"],
-      "@/tests/*": ["../tests/*"]
+      "@types/*": ["./src/types"],
+      "@config/*": ["./src/config"],
+      "@constants/*": ["./src/constants"],
+      "@docs/*": ["./src/docs"],
+      "@jobs/*": ["./src/jobs"],
+      "@keys/*": ["./src/keys"],
+      "@modules/*": ["./src/modules"],
+      "@shared/*": ["./src/shared"]
     },
     "strict": true
   },

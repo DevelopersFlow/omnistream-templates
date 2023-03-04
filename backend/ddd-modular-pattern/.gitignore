@@ -1,0 +1,22 @@
+# Libraries
+node_modules
+
+# Build
+build
+dist
+lib
+
+# Tests
+coverage
+tests
+
+# Environments
+.env
+yarn-error.log
+
+# Uploads
+tmp/
+!tmp/.gitkeep
+!tmp/uploads
+tmp/uploads/
+!tmp/uploads/.gitkeep
