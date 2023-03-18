@@ -1,0 +1,48 @@
+import 'dotenv/config';
+
+export const env = {
+  HOST: process.env.HOST,
+  PORT: process.env.PORT,
+  NODE_ENV: process.env.NODE_ENV,
+
+  APP_API_URL: process.env.APP_API_URL,
+  APP_WEB_URL: process.env.APP_WEB_URL,
+
+  MAIN_DB_TYPE: process.env.MAIN_DB_TYPE,
+  MAIN_DB_HOST: process.env.MAIN_DB_HOST,
+  MAIN_DB_PORT: process.env.MAIN_DB_PORT,
+  MAIN_DB_USER: process.env.MAIN_DB_USER,
+  MAIN_DB_PASS: process.env.MAIN_DB_PASS,
+  MAIN_DATABASE: process.env.MAIN_DATABASE,
+
+  MONGO_DB_TYPE: process.env.MONGO_DB_TYPE,
+  MONGO_DB_HOST: process.env.MONGO_DB_HOST,
+  MONGO_DB_PORT: process.env.MONGO_DB_PORT,
+  MONGO_DB_USER: process.env.MONGO_DB_USER,
+  MONGO_DB_PASS: process.env.MONGO_DB_PASS,
+  MONGO_DATABASE: process.env.MONGO_DATABASE,
+
+  REDIS_DB_HOST: process.env.REDIS_DB_HOST,
+  REDIS_DB_PORT: process.env.REDIS_DB_PORT,
+  REDIS_DB_PASS: process.env.REDIS_DB_PASS,
+
+  ENTITIES_ROOT_PATH: process.env.ENTITIES_ROOT_PATH,
+  ENTITIES_EXTENSION: process.env.ENTITIES_EXTENSION,
+
+  JWT_SECRET_TOKEN: process.env.JWT_SECRET_TOKEN,
+  JWT_EXPIRES_IN_SECRET_TOKEN: process.env.JWT_EXPIRES_IN_SECRET_TOKEN,
+  JWT_SECRET_REFRESH_TOKEN: process.env.JWT_SECRET_REFRESH_TOKEN,
+  JWT_EXPIRES_IN_REFRESH_TOKEN: process.env.JWT_EXPIRES_IN_REFRESH_TOKEN,
+
+  STORAGE_DRIVER: process.env.STORAGE_DRIVER,
+  STORAGE_BUCKET: process.env.STORAGE_BUCKET,
+
+  MAIL_DRIVER: process.env.MAIL_DRIVER,
+
+  AWS_ACCESS_KEY_ID: process.env.AWS_ACCESS_KEY_ID,
+  AWS_SECRET_ACCESS_KEY: process.env.AWS_SECRET_ACCESS_KEY,
+
+  SENTRY_DSN: process.env.SENTRY_DSN,
+
+  POPULATE_DEV_SEEDS: process.env.POPULATE_DEV_SEEDS,
+};
