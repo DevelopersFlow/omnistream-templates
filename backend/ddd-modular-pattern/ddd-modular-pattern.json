@@ -1,15 +1,48 @@
 {
   "scripts": [
     {
+      "key": "lint:es",
+      "value": "eslint --ext .ts"
+    },
+    {
+      "key": "lint:ts",
+      "value": "tsc --noEmit"
+    },
+    {
       "key": "dev",
-      "value": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --inspect --no-notify --ignore-watch ./node_modules ./src/index.ts"
+      "value": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --no-notify --ignore-watch ./node_modules ./src/server.ts"
+    },
+    {
+      "key": "debug",
+      "value": "ts-node-dev -r tsconfig-paths/register --respawn --transpile-only --inspect --no-notify --ignore-watch ./node_modules ./src/server.ts"
+    },
+    {
+      "key": "start",
+      "value": "node ./dist/server.js"
     },
     {
       "key": "build",
       "value": "rimraf ./dist && babel src --extensions \".js,.ts\" --out-dir dist --copy-files --no-copy-ignored"
+    },
+    {
+      "key": "typeorm",
+      "value": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
+    },
+    {
+      "key": "seed",
+      "value": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm-seeding/dist/cli.js seed"
+    },
+    {
+      "key": "db:recreate",
+      "value": "yarn typeorm schema:drop && yarn typeorm migration:run && yarn seed && clear"
     }
   ],
   "dependencies": [
+    "dotenv",
+    "mysql2",
+    "reflect-metadata",
+    "typeorm@^0.2.25",
+    "typeorm-seeding@^1.6.1",
     "express"
   ],
   "devDependencies": [
@@ -22,6 +55,7 @@
     "@babel/plugin-proposal-private-property-in-object",
     "@babel/preset-env",
     "@babel/preset-typescript",
+    "@types/mysql",
     "@types/node",
     "@typescript-eslint/eslint-plugin@^5.45.0",
     "@typescript-eslint/parser@^5.45.0",
