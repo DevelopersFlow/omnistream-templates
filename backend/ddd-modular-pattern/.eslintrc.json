@@ -87,6 +87,8 @@
         "newlinesBetween": "always",
         "groups": [
           "module",
+          "/^(!@docs|!@config|!@constants|!@jobs|!@modules|!@shared|!@helpers|!@interfaces|!@services|!@utils)/",
+          "/^(@docs|@config|@constants|@jobs|@modules|@shared|@helpers|@interfaces|@services|@utils)/",
           [
             "parent",
             "sibling",
