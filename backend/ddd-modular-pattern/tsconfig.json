@@ -10,6 +10,7 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
     "baseUrl": ".",
     "paths": {
       "@types/*": ["./src/types/*"],
