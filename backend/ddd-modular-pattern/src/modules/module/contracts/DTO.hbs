@@ -1,0 +1,55 @@
+import {
+  NonFunctionProperties,
+  ObjectPropertyNames,
+} from '@shared/contracts/IGeneric';
+import { IQuery } from '@shared/helpers/HttpQueryHelper';
+
+import { ENTITY_NAME } from '../infra/typeorm/entities/ENTITY_NAME';
+
+/**
+ * Model: ENTITY_NAME
+ */
+export type IENTITY_NAME = NonFunctionProperties<ENTITY_NAME>;
+
+/**
+ * Method: POST
+ * Create ENTITY_NAME
+ */
+export type ICreateENTITY_NAME = Omit<
+  IENTITY_NAME,
+  'id' | 'created_at' | 'updated_at' | 'deleted_at'
+>;
+
+/**
+ * Method: GET
+ * LIST ENTITY_NAME
+ */
+export type IListENTITY_NAME = {
+  query?: IQuery;
+  relations?: ObjectPropertyNames<IENTITY_NAME>[] | string[];
+};
+
+/**
+ * Method: GET
+ * SHOW ENTITY_NAME
+ */
+export type IShowENTITY_NAME = Pick<IENTITY_NAME, 'id'> & {
+  relations?: ObjectPropertyNames<IENTITY_NAME>[] | string[];
+};
+
+/**
+ * Method: PUT
+ * Update ENTITY_NAME
+ */
+export type IUpdateENTITY_NAME = ICreateENTITY_NAME & { id: number };
+
+/**
+ * Method: PATCH
+ * Update ENTITY_NAME
+ */
+export type IPartialUpdateENTITY_NAME = Partial<IUpdateENTITY_NAME>;
+
+/**
+ * DELETE ENTITY_NAME
+ */
+export type IDeleteENTITY_NAME = Pick<IUpdateENTITY_NAME, 'id'>;
