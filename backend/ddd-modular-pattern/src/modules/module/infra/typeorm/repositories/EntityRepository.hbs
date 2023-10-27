@@ -1,0 +1,17 @@
+import { getRepository } from 'typeorm';
+
+import { IENTITY_NAMERepository } from 'REPOSITORY_INTERFACE_PATH';
+import { BaseRepository } from '@shared/infra/typeorm/repositories/BaseRepository';
+
+import { ENTITY_NAME } from 'ENTITY_PATH';
+
+class ENTITY_NAMERepository
+  extends BaseRepository<ENTITY_NAME>
+  implements IENTITY_NAMERepository
+{
+  constructor() {
+    super(getRepository(ENTITY_NAME));
+  }
+}
+
+export { ENTITY_NAMERepository };
