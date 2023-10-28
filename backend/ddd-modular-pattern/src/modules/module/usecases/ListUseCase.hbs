@@ -1,0 +1,21 @@
+import { injectable, inject } from 'tsyringe';
+
+import { IListENTITY_NAME } from '../../dtos/IENTITY_NAMEDTO';
+import { ENTITY_NAME } from '../../infra/typeorm/entities/ENTITY_NAME';
+import { IENTITY_NAMERepository } from '../../repositories/IENTITY_NAMERepository';
+
+@injectable()
+class ListENTITY_NAMEUseCase {
+  constructor(
+    @inject('ENTITY_NAMERepository')
+    private CAMEL_CASE_ENTITY_NAMERepository: IENTITY_NAMERepository,
+  ) {}
+
+  public async execute(params: IListENTITY_NAME): Promise<[ENTITY_NAME[], number]> {
+    const data = await this.CAMEL_CASE_ENTITY_NAMERepository.find(params);
+
+    return data;
+  }
+}
+
+export { ListENTITY_NAMEUseCase };

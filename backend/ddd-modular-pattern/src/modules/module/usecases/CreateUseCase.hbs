@@ -1,0 +1,23 @@
+import { injectable, inject } from 'tsyringe';
+
+import { ICreateENTITY_NAME } from 'DTO_PATH';
+import { ENTITY_NAME } from 'ENTITY_PATH';
+import { IENTITY_NAMERepository } from 'REPOSITORY_PATH';
+
+@injectable()
+class CreateENTITY_NAMEUseCase {
+  constructor(
+    @inject('ENTITY_NAMERepository')
+    private CAMEL_CASE_ENTITY_NAMERepository: IENTITY_NAMERepository,
+  ) {}
+
+  public async execute(data: ICreateENTITY_NAME): Promise<ENTITY_NAME> {
+    const { id } = await this.CAMEL_CASE_ENTITY_NAMERepository.create(data);
+
+    const createdENTITY_NAME = await this.CAMEL_CASE_ENTITY_NAMERepository.findById({ id });
+
+    return createdENTITY_NAME;
+  }
+}
+
+export { CreateENTITY_NAMEUseCase };

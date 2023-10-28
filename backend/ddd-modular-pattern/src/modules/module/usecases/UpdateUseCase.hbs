@@ -1,0 +1,38 @@
+import { injectable, inject } from 'tsyringe';
+
+import { AppError } from '@shared/errors/AppError';
+
+import { IUpdateENTITY_NAME } from 'DTO_PATH';
+import { ENTITY_NAME } from 'ENTITY_PATH';
+import { IENTITY_NAMERepository } from 'REPOSITORY_PATH';
+
+@injectable()
+class UpdateENTITY_NAMEUseCase {
+  constructor(
+    @inject('ENTITY_NAMERepository')
+    private CAMEL_CASE_ENTITY_NAMERepository: IENTITY_NAMERepository,
+  ) {}
+
+  public async execute({ id, ...rest }: IUpdateENTITY_NAME): Promise<ENTITY_NAME> {
+    const foundedENTITY_NAMEById = await this.CAMEL_CASE_ENTITY_NAMERepository.findById({
+      id,
+    });
+
+    if (!foundedENTITY_NAMEById) {
+      throw new AppError('ENTITY_NAME not found!', 404);
+    }
+
+    await this.CAMEL_CASE_ENTITY_NAMERepository.save({
+      ...foundedENTITY_NAMEById,
+      ...rest,
+    });
+
+    const updatedENTITY_NAME = await this.CAMEL_CASE_ENTITY_NAMERepository.findById({
+      id,
+    });
+
+    return updatedENTITY_NAME;
+  }
+}
+
+export { UpdateENTITY_NAMEUseCase };

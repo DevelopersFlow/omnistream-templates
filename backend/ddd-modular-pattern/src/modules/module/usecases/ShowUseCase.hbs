@@ -1,0 +1,33 @@
+import { injectable, inject } from 'tsyringe';
+
+import { AppError } from '@shared/errors/AppError';
+
+import { IShowENTITY_NAME } from 'DTO_PATH';
+import { ENTITY_NAME } from 'ENTITY_PATH';
+import { IENTITY_NAMERepository } from 'REPOSITORY_PATH';
+
+@injectable()
+class ShowENTITY_NAMEUseCase {
+  constructor(
+    @inject('ENTITY_NAMERepository')
+    private CAMEL_CASE_ENTITY_NAMERepository: IENTITY_NAMERepository,
+  ) {}
+
+  public async execute({
+    id,
+    relations,
+  }: IShowENTITY_NAME): Promise<ENTITY_NAME> {
+    const CAMEL_CASE_ENTITY_NAME = await this.CAMEL_CASE_ENTITY_NAMERepository.findById({
+      id,
+      relations,
+    });
+
+    if (!CAMEL_CASE_ENTITY_NAME) {
+      throw new AppError('ENTITY_NAME not found!', 404);
+    }
+
+    return CAMEL_CASE_ENTITY_NAME;
+  }
+}
+
+export { ShowENTITY_NAMEUseCase };

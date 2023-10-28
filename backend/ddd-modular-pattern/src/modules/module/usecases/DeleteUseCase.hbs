@@ -1,0 +1,28 @@
+import { injectable, inject } from 'tsyringe';
+
+import { AppError } from '@shared/errors/AppError';
+
+import { IDeleteENTITY_NAME } from 'DTO_PATH';
+import { IENTITY_NAMERepository } from 'REPOSITORY_PATH';
+
+@injectable()
+class DeleteENTITY_NAMEUseCase {
+  constructor(
+    @inject('ENTITY_NAMERepository')
+    private CAMEL_CASE_ENTITY_NAMERepository: IENTITY_NAMERepository,
+  ) {}
+
+  public async execute({ id }: IDeleteENTITY_NAME): Promise<void> {
+    const foundedENTITY_NAME = await this.CAMEL_CASE_ENTITY_NAMERepository.findById({
+      id,
+    });
+
+    if (!foundedENTITY_NAME) {
+      throw new AppError('ENTITY_NAME not found!', 404);
+    }
+
+    await this.CAMEL_CASE_ENTITY_NAMERepository.delete(id);
+  }
+}
+
+export { DeleteENTITY_NAMEUseCase };
