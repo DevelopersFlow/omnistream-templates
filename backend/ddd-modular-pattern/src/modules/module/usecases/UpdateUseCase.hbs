@@ -14,16 +14,16 @@ class UpdateENTITY_NAMEUseCase {
   ) {}
 
   public async execute({ id, ...rest }: IUpdateENTITY_NAME): Promise<ENTITY_NAME> {
-    const foundedENTITY_NAMEById = await this.CAMEL_CASE_ENTITY_NAMERepository.findById({
+    const foundedENTITY_NAME = await this.CAMEL_CASE_ENTITY_NAMERepository.findById({
       id,
     });
 
-    if (!foundedENTITY_NAMEById) {
+    if (!foundedENTITY_NAME) {
       throw new AppError('ENTITY_NAME not found!', 404);
     }
 
     await this.CAMEL_CASE_ENTITY_NAMERepository.save({
-      ...foundedENTITY_NAMEById,
+      ...foundedENTITY_NAME,
       ...rest,
     });
 
