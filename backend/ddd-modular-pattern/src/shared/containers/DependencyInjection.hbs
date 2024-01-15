@@ -1,0 +1,9 @@
+import { container } from 'tsyringe';
+
+import { IENTITY_NAMERepository } from 'REPOSITORY_INTERFACE_PATH';
+import { ENTITY_NAMERepository } from 'REPOSITORY_PATH';
+
+container.registerSingleton<IENTITY_NAMERepository>(
+  'ENTITY_NAMERepository',
+  ENTITY_NAMERepository,
+);
