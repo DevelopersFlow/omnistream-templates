@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DeepPartial, Repository, SelectQueryBuilder, In, ObjectLiteral } from 'typeorm';
 
 import { operators } from '@shared/helpers/HttpQueryHelper';
@@ -87,7 +86,7 @@ class BaseRepository<Entity extends ObjectLiteral> implements IBaseRepository<En
 
     return {
       relations,
-      take: query.limit,
+      take: query?.limit,
       skip: ((query?.page ?? 0) - 1) * (query?.limit ?? 1),
       order,
       where,
@@ -97,13 +96,13 @@ class BaseRepository<Entity extends ObjectLiteral> implements IBaseRepository<En
   public async create(data: Entity): Promise<Entity> {
     const entity = this.orm.create(data as DeepPartial<Entity>);
 
-    await this.orm.save<DeepPartial<Entity>>(entity as any);
+    await this.orm.save<DeepPartial<Entity>>(entity as DeepPartial<Entity>);
 
     return entity;
   }
 
   public async save(entity: Entity): Promise<Entity> {
-    await this.orm.save(entity as any);
+    await this.orm.save(entity as DeepPartial<Entity>);
 
     return entity;
   }
