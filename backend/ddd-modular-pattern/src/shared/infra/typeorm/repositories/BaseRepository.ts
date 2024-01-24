@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { DeepPartial, Repository, SelectQueryBuilder, In } from 'typeorm';
+import { DeepPartial, Repository, SelectQueryBuilder, In, ObjectLiteral } from 'typeorm';
 
 import { operators } from '@shared/helpers/HttpQueryHelper';
 
@@ -10,7 +10,7 @@ import {
   IFindByIds,
 } from './IBaseRepository';
 
-class BaseRepository<Entity> implements IBaseRepository<Entity> {
+class BaseRepository<Entity extends ObjectLiteral> implements IBaseRepository<Entity> {
   protected orm: Repository<Entity>;
 
   private operators = operators;
@@ -52,9 +52,9 @@ class BaseRepository<Entity> implements IBaseRepository<Entity> {
   }
 
   private bind({ query, relations }: IFind) {
-    const order = {};
+    const order: any = {};
 
-    query.sort?.forEach((item) => {
+    query?.sort?.forEach((item) => {
       order[item.property] = item.order;
     });
 
@@ -68,7 +68,7 @@ class BaseRepository<Entity> implements IBaseRepository<Entity> {
     };
 
     const where = (qb: SelectQueryBuilder<Entity>) => {
-      query.q.forEach((item) => {
+      query?.q?.forEach((item) => {
         const parsedEntity = this.getAlias(item.entity);
 
         const property = `${parsedEntity}.${item.property}`;
@@ -88,7 +88,7 @@ class BaseRepository<Entity> implements IBaseRepository<Entity> {
     return {
       relations,
       take: query.limit,
-      skip: (query.page - 1) * query.limit,
+      skip: ((query?.page ?? 0) - 1) * (query?.limit ?? 1),
       order,
       where,
     };
@@ -119,7 +119,7 @@ class BaseRepository<Entity> implements IBaseRepository<Entity> {
     return [entities, total];
   }
 
-  public async findById({ id, relations = [] }: IFindById): Promise<Entity> {
+  public async findById({ id, relations = [] }: IFindById): Promise<Entity | undefined> {
     const entity = await this.orm.findOne(id, { relations });
 
     return entity;
