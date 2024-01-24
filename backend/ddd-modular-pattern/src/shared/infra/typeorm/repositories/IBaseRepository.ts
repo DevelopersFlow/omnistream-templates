@@ -8,7 +8,7 @@ export interface IBaseRepository<Entity> {
   create(data: Entity): Promise<Entity>;
   save(entity: Partial<Entity>): Promise<Entity>;
   find(params: IFind): Promise<[Entity[], number]>;
-  findById(params: IFindById): Promise<Entity>;
+  findById(params: IFindById): Promise<Entity | undefined>;
   findByIds(params: IFindByIds): Promise<Entity[]>;
   delete(id: number): Promise<void>;
   remove(id: number): Promise<void>;
