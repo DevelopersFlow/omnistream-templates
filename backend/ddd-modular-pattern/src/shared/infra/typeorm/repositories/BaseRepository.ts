@@ -1,5 +1,13 @@
-import { DeepPartial, Repository, SelectQueryBuilder, In, ObjectLiteral } from 'typeorm';
+import {
+  DeepPartial,
+  Repository,
+  SelectQueryBuilder,
+  In,
+  ObjectLiteral,
+  FindManyOptions,
+} from 'typeorm';
 
+import { Full } from '@shared/contracts/IGeneric';
 import { operators } from '@shared/helpers/HttpQueryHelper';
 
 import {
@@ -9,7 +17,9 @@ import {
   IFindByIds,
 } from './IBaseRepository';
 
-class BaseRepository<Entity extends ObjectLiteral> implements IBaseRepository<Entity> {
+class BaseRepository<Entity extends ObjectLiteral>
+  implements IBaseRepository<Entity>
+{
   protected orm: Repository<Entity>;
 
   private operators = operators;
@@ -51,7 +61,9 @@ class BaseRepository<Entity extends ObjectLiteral> implements IBaseRepository<En
   }
 
   private bind({ query, relations }: IFind) {
-    const order: any = {};
+    type Order = { [property: string]: 'ASC' | 'DESC' | 1 | -1 };
+
+    const order: Order = {};
 
     query?.sort?.forEach((item) => {
       order[item.property] = item.order;
@@ -90,15 +102,15 @@ class BaseRepository<Entity extends ObjectLiteral> implements IBaseRepository<En
       skip: ((query?.page ?? 0) - 1) * (query?.limit ?? 1),
       order,
       where,
-    };
+    } as unknown as FindManyOptions<Entity> | undefined;
   }
 
-  public async create(data: Entity): Promise<Entity> {
+  public async create(data: Entity): Promise<Full<Entity>> {
     const entity = this.orm.create(data as DeepPartial<Entity>);
 
     await this.orm.save<DeepPartial<Entity>>(entity as DeepPartial<Entity>);
 
-    return entity;
+    return entity as Full<Entity>;
   }
 
   public async save(entity: Entity): Promise<Entity> {
@@ -118,7 +130,10 @@ class BaseRepository<Entity extends ObjectLiteral> implements IBaseRepository<En
     return [entities, total];
   }
 
-  public async findById({ id, relations = [] }: IFindById): Promise<Entity | undefined> {
+  public async findById({
+    id,
+    relations = [],
+  }: IFindById): Promise<Entity | undefined> {
     const entity = await this.orm.findOne(id, { relations });
 
     return entity;
